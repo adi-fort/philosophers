@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:42:55 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/12 15:55:36 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:17:02 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			check_input2(t_times *times);
 
 //philosophers & routines
 void	create_philosophers(t_times *times);
-void	*ft_routine(void);
+void	*ft_routine(void *times);
 
 //utils
 int			ft_isdigit(int c);
