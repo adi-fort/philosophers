@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:42:55 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/12 12:34:21 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:57:37 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@
 
 typedef struct s_times
 {
-	int	times[4];
+	long int	times[5];
 }	t_times;
-
-
 
 // check_input & store values in structure
 int			check_input(char **av);

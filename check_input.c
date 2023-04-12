@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:51:57 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/12 12:35:53 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:59:06 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_input(char **av)
 	int	j;
 
 	i = 1;
-	while (i <= 5)
+	while (av[i])
 	{
 		j = 0;
 		while (av[i][j])
@@ -34,10 +34,16 @@ int	check_input(char **av)
 
 void	store_values(char **av, t_times *times)
 {
-	times->times[0] = ft_atoi(av[1]);
-	times->times[1] = ft_atoi(av[2]);
-	times->times[2] = ft_atoi(av[3]);
-	times->times[3] = ft_atoi(av[4]);
+	int	i;
+
+	times->times[4] = -1;
+	i = 1;
+	while (av[i])
+	{
+		times->times[i-1] = ft_atoi(av[i]);
+		i++;
+	}
+	printf("%ld\n", times->times[4]);
 }
 
 int	check_input2(t_times *times)
@@ -45,7 +51,7 @@ int	check_input2(t_times *times)
 	int	i;
 	
 	i = 0;
-	while (i < 4)
+	while (i < 6)
 	{	
 		if (times->times[i] > 2147483647 || times->times[i] < 0)
 			return (1);

@@ -6,9 +6,10 @@ SRC		= utils.c check_input.c main.c
 OBJ		= ${SRC:.c=.o}
 
 .o:.c
-	${CC} ${OBJ} $< -o ${<:.c=.o}
+	${CC} -c ${OBJ} $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJ}
+	${CC} ${OBJ} -o ${NAME}
 
 all: ${NAME}
 
