@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:42:55 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/12 11:58:56 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:34:21 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <unistd.h>
+#include <stdlib.h>
 
 typedef struct s_times
 {
@@ -28,8 +29,8 @@ typedef struct s_times
 
 // check_input & store values in structure
 int			check_input(char **av);
-void		store_values(char **av);
-int			check_input2(char **av);
+void		store_values(char **av, t_times *times);
+int			check_input2(t_times *times);
 
 //utils
 int			ft_isdigit(int c);

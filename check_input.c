@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:51:57 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/12 12:01:41 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:35:53 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,18 @@ int	check_input(char **av)
 	while (i <= 5)
 	{
 		j = 0;
-		while (argv[i][j])
+		while (av[i][j])
 		{
-			if (!ft_isdigit(argv[i][j]))
-				exit (1);
-		j++;
+			if (!ft_isdigit(av[i][j]))
+				return (1);
+			j++;
 		}
 	i++;
 	}
+	return (0);
 }
 
-void	store_values(char **av)
+void	store_values(char **av, t_times *times)
 {
 	times->times[0] = ft_atoi(av[1]);
 	times->times[1] = ft_atoi(av[2]);
@@ -39,14 +40,14 @@ void	store_values(char **av)
 	times->times[3] = ft_atoi(av[4]);
 }
 
-int	check_input2(char t_times *times)
+int	check_input2(t_times *times)
 {
 	int	i;
 	
 	i = 0;
-	while (i <= 4)
+	while (i < 4)
 	{	
-		if (times[i] > 2147483647 || times->time_to_die < 0)
+		if (times->times[i] > 2147483647 || times->times[i] < 0)
 			return (1);
 		i++;
 	}

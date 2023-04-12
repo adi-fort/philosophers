@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 08:57:17 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/12 12:01:38 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:36:10 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int main(int ac, char **av)
 {
-	struct timeval	time;
+	t_times times;
 	
 	if ((ac == 4 || ac == 5) && check_input(av))
-		store_values(av);
+		store_values(av, &times);
 	else
 		return (1);
 	if (check_input2(&times))

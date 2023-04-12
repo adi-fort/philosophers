@@ -6,22 +6,22 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 10:39:51 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/12 12:00:39 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:16:07 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo.h"
 
 int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
-	int	i;
-	int	num;
-	int	negative;
+	long int	i;
+	long int	num;
+	long int	negative;
 
 	negative = 0;
 	num = 0;
