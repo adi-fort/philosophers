@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:51:57 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/12 14:59:06 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:56:03 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	store_values(char **av, t_times *times)
 	i = 1;
 	while (av[i])
 	{
-		times->times[i-1] = ft_atoi(av[i]);
+		times->times[i - 1] = ft_atoi(av[i]);
 		i++;
 	}
 	printf("%ld\n", times->times[4]);
@@ -49,7 +49,7 @@ void	store_values(char **av, t_times *times)
 int	check_input2(t_times *times)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < 6)
 	{	
