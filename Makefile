@@ -9,7 +9,7 @@ OBJ		= ${SRC:.c=.o}
 	${CC} -c ${OBJ} $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJ}
-	${CC} ${OBJ} -o ${NAME}
+	${CC} ${OBJ} -pthread -o ${NAME}
 
 all: ${NAME}
 

@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:51:57 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/12 15:56:03 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:36:13 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,28 @@ int	check_input(char **av)
 	return (0);
 }
 
-void	store_values(char **av, t_times *times)
+void	store_values(int ac, char **av, t_school *school)
 {
-	int	i;
-
-	times->times[4] = -1;
-	i = 1;
-	while (av[i])
-	{
-		times->times[i - 1] = ft_atoi(av[i]);
-		i++;
-	}
-	printf("%ld\n", times->times[4]);
+	school->times_eat = -1;
+	school->number_philo = ft_atoi(av[1]);
+	school->time_to_die = ft_atoi(av[2]);
+	school->time_to_eat = ft_atoi(av[3]);
+	school->time_to_sleep = ft_atoi(av[4]);
+	if (ac == 6)
+		school->times_eat = ft_atoi(av[5]);
 }
 
-int	check_input2(t_times *times)
+int	check_input2(t_school *school)
 {
-	int	i;
-
-	i = 0;
-	while (i < 6)
-	{	
-		if (times->times[i] > 2147483647 || times->times[i] < 0)
-			return (1);
-		i++;
-	}
+	if (school->number_philo > 2147483647 || school->number_philo < 0)
+		return (1);
+	else if (school->time_to_die > 2147483647 || school->time_to_die < 0)
+		return (2);
+	else if (school->time_to_eat > 2147483647 || school->time_to_eat < 0)
+		return (3);
+	else if (school->time_to_sleep > 2147483647 || school->time_to_sleep < 0)
+		return (4);
+	else if (school->times_eat > 2147483647 || school->times_eat < -2)
+		return (5);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:42:55 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/12 19:17:02 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:29:33 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,32 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef struct s_times
+typedef struct s_philo
 {
-	long int	times[5]; //array di interi dove sono storati gli av[i]
-	pthread_t	*tid_pointers; //puntatore al Thread Identifier
-}	t_times;
+	pthread_t philo;
+
+} t_philo;
+
+typedef struct s_school
+{
+	t_philo		*philosophers;
+	long int	time_to_sleep;
+	long int	time_to_die;
+	long int	number_philo;
+	long int	time_to_eat;
+	long int	times_eat;
+}	t_school;
 
 
 
 // check_input & store values in structure
 int			check_input(char **av);
-void		store_values(char **av, t_times *times);
-int			check_input2(t_times *times);
+void		store_values(int ac, char **av, t_school *school);
+int			check_input2(t_school *school);
 
 //philosophers & routines
-void	create_philosophers(t_times *times);
-void	*ft_routine(void *times);
+void	create_philosophers(t_school *school);
+void	*ft_routine(void *school);
 
 //utils
 int			ft_isdigit(int c);
