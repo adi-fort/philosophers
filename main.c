@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 08:57:17 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/14 15:58:05 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:43:48 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,22 @@ void	*ft_routine(void *philo)
 	t_philo 			*aristotele;
 
 	aristotele = (t_philo *)philo;
-	pthread_mutex_lock(&aristotele->fork);
-	printf("%d has taken a fork\n", aristotele->philo_id);	
-	pthread_mutex_lock(&aristotele->back->philosophers[aristotele->next_philo_id].fork);
-	printf("%d has taken a fork\n", aristotele->philo_id);
-	printf("%d is eating\n", aristotele->philo_id);
-	usleep(aristotele->back->time_to_eat);
-	pthread_mutex_unlock(&aristotele->fork);
-	pthread_mutex_unlock(&aristotele->back->philosophers[aristotele->next_philo_id].fork);
-	printf("numero del prossimo filosofo%d\n", aristotele->next_philo_id);
-	printf("%d is thinking\n", aristotele->philo_id);
-	printf("%d is sleepng\n", aristotele->philo_id);
+	while (1) 
+	{
+		if (aristotele->next_philo_id % 2)
+			usleep(30);
+		pthread_mutex_lock(&aristotele->fork);
+		printf("%d has taken a fork\n", aristotele->philo_id);	
+		pthread_mutex_lock(&aristotele->back->philosophers[aristotele->next_philo_id].fork);
+		printf("%d has taken a fork\n", aristotele->philo_id);
+		printf("%d is eating\n", aristotele->philo_id);
+		usleep(aristotele->back->time_to_eat);
+		pthread_mutex_unlock(&aristotele->fork);
+		pthread_mutex_unlock(&aristotele->back->philosophers[aristotele->next_philo_id].fork);
+		usleep(aristotele->back->time_to_sleep);
+		printf("%d is sleeping\n", aristotele->philo_id);
+		printf("%d is thinking\n", aristotele->philo_id);
+	}
 	return (0);
 }
 
