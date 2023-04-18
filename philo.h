@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:42:55 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/14 15:54:03 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:53:18 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef struct s_school
 	long int	time_to_die;
 	long int	time_to_eat;
 	long int	times_eat;
+	int			starting_time;
+	int			timing;
 }	t_school;
-
-
 
 // check_input & store values in structure
 int			check_input(char **av);
@@ -48,10 +48,14 @@ void		store_values(int ac, char **av, t_school *school);
 int			check_input2(t_school *school);
 
 //philosophers & routines
-void	thread_create(t_school *school);
-void	*ft_routine(void *school);
+void		thread_create(t_school *school);
+void		*ft_routine(void *school);
 
 //utils
 int			ft_isdigit(int c);
 long int	ft_atoi(const char *str);
+
+//death & time
+int		time_ms(void);
+int		right_time(t_school *school);
 #endif

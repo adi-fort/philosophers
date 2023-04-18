@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 08:57:17 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/14 16:43:48 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/18 11:14:15 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,24 @@ void	philo_init(t_school *school, int i)
 
 void	*ft_routine(void *philo)
 {
-	t_philo 			*aristotele;
+	t_philo 	*aristotele;	
 
 	aristotele = (t_philo *)philo;
 	while (1) 
 	{
 		if (aristotele->next_philo_id % 2)
-			usleep(30);
+			usleep(30000);
 		pthread_mutex_lock(&aristotele->fork);
-		printf("%d has taken a fork\n", aristotele->philo_id);	
+		printf("%d %d has taken a fork\n", right_time(aristotele->back), aristotele->philo_id);	
 		pthread_mutex_lock(&aristotele->back->philosophers[aristotele->next_philo_id].fork);
-		printf("%d has taken a fork\n", aristotele->philo_id);
-		printf("%d is eating\n", aristotele->philo_id);
-		usleep(aristotele->back->time_to_eat);
+		printf("%d %d has taken a fork\n", right_time(aristotele->back), aristotele->philo_id);
+		printf("%d %d is eating\n", right_time(aristotele->back), aristotele->philo_id);
+		usleep(aristotele->back->time_to_eat * 1000);
 		pthread_mutex_unlock(&aristotele->fork);
 		pthread_mutex_unlock(&aristotele->back->philosophers[aristotele->next_philo_id].fork);
-		usleep(aristotele->back->time_to_sleep);
-		printf("%d is sleeping\n", aristotele->philo_id);
-		printf("%d is thinking\n", aristotele->philo_id);
+		printf("%d %d is sleeping\n", right_time(aristotele->back), aristotele->philo_id);
+		usleep(aristotele->back->time_to_sleep * 1000);
+		printf("%d %d is thinking\n", right_time(aristotele->back), aristotele->philo_id);
 	}
 	return (0);
 }
@@ -63,18 +63,16 @@ void	thread_create(t_school *school)
 int	main(int ac, char **av)
 {
 	t_school school;
-	int	i;	
-
+	int	i;
+	
 	if ((ac == 5 || ac == 6) && !check_input(av))
 		store_values(ac, av, &school);
 	else
 		return (1);
+	school.starting_time = time_ms();
 	if (!check_input2(&school))
 		thread_create(&school);
-	i = 0;
-	while (i < school.number_philo)
-	{
+	i = - 1;
+	while (++i < school.number_philo)
 		pthread_join(school.philosophers[i].philo, NULL);
-		i++;
-	}
 }

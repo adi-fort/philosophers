@@ -2,7 +2,7 @@ NAME	= philo
 FLAGS	= -Wall -Wextra -Werror
 CC		= gcc ${FLAGS}
 RM		= rm -f
-SRC		= utils.c check_input.c main.c 
+SRC		= utils.c check_input.c main.c death_time.c 
 OBJ		= ${SRC:.c=.o}
 
 .o:.c
