@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 08:57:17 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/18 11:14:15 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/19 11:23:15 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ void	*ft_routine(void *philo)
 		printf("%d %d is sleeping\n", right_time(aristotele->back), aristotele->philo_id);
 		usleep(aristotele->back->time_to_sleep * 1000);
 		printf("%d %d is thinking\n", right_time(aristotele->back), aristotele->philo_id);
+		if ( aristotele->back->times_eat > 0 && (aristotele->back->timing > aristotele->back->times_eat * aristotele->back->time_to_die))
+			exit(1);
+		if (aristotele->back->time_to_die < aristotele->back->time_to_sleep + aristotele->back->time_to_eat)
+		{
+			printf("%d %d died\n", right_time(aristotele->back), aristotele->philo_id);
+			exit(1);
+		}
 	}
 	return (0);
 }
@@ -73,6 +80,11 @@ int	main(int ac, char **av)
 	if (!check_input2(&school))
 		thread_create(&school);
 	i = - 1;
+	if (school.number_philo == 1)
+	{
+		printf("0 1 has taken a fork\n0 1 died\n");
+		exit(1);
+	}
 	while (++i < school.number_philo)
 		pthread_join(school.philosophers[i].philo, NULL);
 }
