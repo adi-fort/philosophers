@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 09:43:51 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/18 11:49:55 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/19 11:29:59 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,3 @@ int	right_time(t_school *school)
 	school->timing = (time_ms() - school->starting_time);
 	return (school->timing);
 }
-
-
-
-//times_eat
-//death > sleep = eat
-
