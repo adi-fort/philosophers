@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:42:55 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/20 11:37:16 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:46:29 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_philo
 	int				philo_id;
 	int				next_philo_id;
 	pthread_mutex_t	fork;
+	pthread_mutex_t death;
 	struct s_school	*back;
 }	t_philo;
 

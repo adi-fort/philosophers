@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 09:43:51 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/20 12:43:14 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/21 12:07:28 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ int	oracle(t_school *school)
 {
 	if (school->times_eat > 0
 		&& (school->timing > school->times_eat * school->time_to_die))
-		return (0);
+		return (1);
 	if (school->time_to_die < school->sum
-		|| school->time_to_die < school->m)
-		return (0);
-	return (1);
+		|| school->time_to_die < school->m)	
+		return (2);
+	return (0);
 }
+
+//CONTROLLO TIMES_EAT
+//CONTROLLO MUOIONO TUTTI 
