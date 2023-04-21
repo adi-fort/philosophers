@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 08:57:17 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/21 12:09:14 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/21 12:41:30 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	philo_init(t_school *school, int i)
 	if (i + 1 == school->number_philo)
 		school->philosophers[i].next_philo_id = 0;
 	pthread_mutex_init(&school->philosophers[i].fork, NULL);
+	pthread_mutex_init(&school->philosophers[i].death, NULL);
 	school->philosophers[i].back = school;
 }
 
@@ -29,6 +30,7 @@ void	*ft_routine(void *philo)
 	a = (t_philo *)philo;
 	if (a->next_philo_id % 2 == 0)
 		usleep(300);
+	a->death_counter = 0;
 	while (1)
 	{
 		pthread_mutex_lock(&a->fork);
@@ -36,16 +38,18 @@ void	*ft_routine(void *philo)
 		pthread_mutex_lock(&a->back->philosophers[a->next_philo_id].fork);
 		printf("%d %d has taken a fork\n", right_time(a->back), a->philo_id);
 		printf("%d %d is eating\n", right_time(a->back), a->philo_id);
-//		pthread_mutex_lock(&a->death);		
-//		if (death_counter is locked) -> death_counter++;
-//		if (death_counter == times_eat) -> break;
-//		pthread_mutex_unlock(&a->death);
+		pthread_mutex_lock(&a->death);		
+//		if (pthread_mutex_lock(&a->death) == 0)
+			a->death_counter++;
+		pthread_mutex_unlock(&a->death);
 		usleep(a->back->time_to_eat * 1000);
 		pthread_mutex_unlock(&a->fork);
 		pthread_mutex_unlock(&a->back->philosophers[a->next_philo_id].fork);
+		if (a->death_counter == a->back->times_eat)
+			break ;
 		printf("%d %d is sleeping\n", right_time(a->back), a->philo_id);
-		usleep(a->back->time_to_sleep * 1010);
-		if (oracle(a->back) == 2) 
+		usleep(a->back->time_to_sleep * 1000);
+		if (oracle(a->back))
 		{
 			printf("%d %d died\n", right_time(a->back), a->philo_id);
 			break ;
@@ -77,7 +81,6 @@ int	main(int ac, char **av)
 {
 	t_school	school;
 	int			i;
-	int death_counter = 0;
 
 	if ((ac == 5 || ac == 6) && !check_input(av))
 		store_values(ac, av, &school);
