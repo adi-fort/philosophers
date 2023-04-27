@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 09:43:51 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/19 11:29:59 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:51:11 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,21 @@ int	time_ms(void)
 
 int	right_time(t_school *school)
 {
-	school->timing = (time_ms() - school->starting_time);
-	return (school->timing);
+	return (time_ms() - school->starting_time);
 }
+
+int	full(t_school *school)
+{
+	if (school->times_eat > 0)
+	{
+	if (right_time(school) >= school->times_eat * (school->time_to_eat + school->time_to_sleep))
+		return (1);
+	}
+//	if (school->time_to_die < school->sum
+//		|| school->time_to_die < school->m)	
+//		return (2);
+ return (0);
+}
+
+//CONTROLLO TIMES_EAT
+//CONTROLLO MUOIONO TUTTI 

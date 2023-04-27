@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:51:57 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/19 12:19:12 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/21 12:08:26 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	store_values(int ac, char **av, t_school *school)
 	if (ac == 6)
 		school->times_eat = ft_atoi(av[5]);
 	school->sum = school->time_to_eat + school->time_to_sleep;
+	school->m = school ->time_to_eat * 2 ;
 }
 
 int	check_input2(t_school *school)
