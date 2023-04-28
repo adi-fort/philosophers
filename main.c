@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 08:57:17 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/27 14:58:00 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/28 12:58:10 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	philo_init(t_school *school, int i)
 	if (i + 1 == school->number_philo)
 		school->philosophers[i].next_philo_id = 0;
 	pthread_mutex_init(&school->philosophers[i].fork, NULL);
-	pthread_mutex_init(&school->philosophers[i].death, NULL);
 	school->philosophers[i].back = school;
 }
 
@@ -32,25 +31,24 @@ void	*ft_routine(void *philo)
 		usleep(300);
 	while (1)
 	{
-		if (full(a->back))
+		a->starving_time = 0;
+		if (full(a->back) || death(a))
 			break ;
 		pthread_mutex_lock(&a->fork);
 		printf("%d %d has taken a fork\n", right_time(a->back), a->philo_id);
 		pthread_mutex_lock(&a->back->philosophers[a->next_philo_id].fork);
 		printf("%d %d has taken a fork\n", right_time(a->back), a->philo_id);
+		a->starving_time = right_time(a->back);
 		printf("%d %d is eating\n", right_time(a->back), a->philo_id);
 		usleep(a->back->time_to_eat * 1000);
 		pthread_mutex_unlock(&a->fork);
-		pthread_mutex_unlock(&a->back->philosophers[a->next_philo_id].fork);
-		if (full(a->back))
+		pthread_mutex_unlock(&a->back->philosophers[a->next_philo_id].fork);	
+		if (full(a->back) || death(a))
 			break ;
 		printf("%d %d is sleeping\n", right_time(a->back), a->philo_id);
 		usleep(a->back->time_to_sleep * 1000);
-	//	if (oracle(a->back))
-	//	{
-	//		printf("%d %d died\n", right_time(a->back), a->philo_id);
-	//		break ;
-	//	}
+		if (full(a->back) || death(a))
+			break ;
 		printf("%d %d is thinking\n", right_time(a->back), a->philo_id);
 	}
 	return (0);

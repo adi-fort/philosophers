@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:42:55 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/04/27 14:37:15 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/04/28 12:58:13 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ typedef struct s_philo
 	pthread_t		philo;
 	int				philo_id;
 	int				next_philo_id;
+	long int		starving_time;
 	pthread_mutex_t	fork;
-	pthread_mutex_t death;
-	long int		death_counter;
 	struct s_school	*back;
 }	t_philo;
 
@@ -52,7 +51,8 @@ void				thread_create(t_school *school);
 void				*ft_routine(void *school);
 int					ft_isdigit(int c);
 long int			ft_atoi(const char *str);
-int					time_ms(void);
+long int			time_ms(void);
 int					right_time(t_school *school);
 int					full(t_school *school);
+int					death(t_philo *philo);
 #endif
