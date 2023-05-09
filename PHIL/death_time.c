@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 09:43:51 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/05/05 16:19:27 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:41:07 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	full(t_school *school)
 	}
 	if (school->times_eat > 0 && school->number_philo % 2 == 1)
 	{
-		if (right_time(school) >= ((school->times_eat * (school->time_to_eat * 3))))
+		if (right_time(school) >= ((school->times_eat * (school->time_to_eat + school->time_to_sleep)) + school->time_to_eat / 3))
 			return (2);
 	}
 	return (0);
@@ -42,10 +42,9 @@ int	full(t_school *school)
 
 int	death(t_philo *philo)
 { 
-	if (philo->back->time_to_die < right_time(philo->back) -  philo->starving_time)
-	{
-		printf("%d %d is dead\n", right_time(philo->back), philo->philo_id);
+	printf("f\n");
+	if (philo && philo->back && philo->back->time_to_die <= right_time(philo->back) -  philo->starving_time)
 		return (1);
-	}
+	printf("h\n");
 	return (0);
 }
