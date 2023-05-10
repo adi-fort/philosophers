@@ -1,5 +1,5 @@
 NAME	= philo
-FLAGS	= -Wall -Wextra -Werror #-fsanitize=thread -g -o1
+FLAGS	= -Wall -Wextra -Werror -fsanitize=thread -g -o1
 CC		= gcc ${FLAGS}
 RM		= rm -f
 SRC		= utils.c check_input.c main.c death_time.c 

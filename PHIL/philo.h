@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:42:55 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/05/09 18:47:46 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:30:38 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_philo
 	long int		starving_time;
 	pthread_mutex_t	fork;
 	struct s_school	*back;
+	int				death_counter;
 }	t_philo;
 
 typedef struct s_school
@@ -43,7 +44,7 @@ typedef struct s_school
 	long int		m;
 	int				starting_time;
 	int				timing;
-	int 			death_counter;
+//	int				death_counter;
 }	t_school;
 
 int					check_input(char **av);
