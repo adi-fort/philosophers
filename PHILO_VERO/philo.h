@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:42:55 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/05/15 17:10:25 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:09:47 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,24 @@ typedef struct s_philo
 	long int		starving_time;
 	pthread_mutex_t	fork;
 	struct s_school	*back;
-	int				death_counter;
 }	t_philo;
 
 typedef struct s_school
 {
 	t_philo			*philosophers;
+	pthread_mutex_t	death_m;
 	pthread_t		death;
 	long int		number_philo;
 	long int		time_to_sleep;
 	long int		time_to_die;
 	long int		time_to_eat;
 	long int		times_eat;
-	long int		sum;
-	long int		m;
 	int				starting_time;
 	int				timing;
-//	int				death_counter;
+	long int		sum;
+	long int		m;
+	int				death_counter;
+
 }	t_school;
 
 int					check_input(char **av);
@@ -57,6 +58,7 @@ long int			ft_atoi(const char *str);
 long int			time_ms(void);
 int					right_time(t_school *school);
 int					full(t_school *school);
-int					death(t_philo *philo);
 void				*ft_death(void *school);
+void				ft_usleep(int time);
+
 #endif
