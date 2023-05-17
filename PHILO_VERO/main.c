@@ -6,7 +6,7 @@
 /*   By: adi-fort <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 08:57:17 by adi-fort          #+#    #+#             */
-/*   Updated: 2023/05/16 18:19:37 by adi-fort         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:48:45 by adi-fort         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ void	philo_init(t_school *school, int i)
 	school->death_counter = 0;
 }
 
+void	lock(t_philo *a)
+{
+	pthread_mutex_lock(&a->fork);
+	printf("%d %d has taken a fork\n", right_time(a->back), a->philo_id);
+	pthread_mutex_lock(&a->back->philosophers[a->next_philo_id].fork);
+	printf("%d %d has taken a fork\n", right_time(a->back), a->philo_id);
+}
+
 void	*ft_routine(void *philo)
 {
 	t_philo	*a;	
@@ -32,10 +40,7 @@ void	*ft_routine(void *philo)
 	{
 		if (a->philo_id % 2 == 0)
 			usleep(50);
-		pthread_mutex_lock(&a->fork);
-		printf("%d %d has taken a fork\n", right_time(a->back), a->philo_id);
-		pthread_mutex_lock(&a->back->philosophers[a->next_philo_id].fork);
-		printf("%d %d has taken a fork\n", right_time(a->back), a->philo_id);
+		lock(a);
 		if (full(a->back) || a->back->death_counter == 1)
 			break ;
 		a->starving_time = right_time(a->back);
@@ -74,32 +79,6 @@ void	thread_create(t_school *school)
 		pthread_detach(school->philosophers[i].philo);
 		i++;
 	}
-}
-
-void	*ft_death(void *school)
-{
-	int			i;
-	t_school	*b;
-
-	b = (t_school *)school;
-	while (1)
-	{
-		i = 0;
-		while (i < b->number_philo)
-		{
-			if (b->time_to_die < right_time(b)
-				- b->philosophers[i].starving_time)
-			{
-				pthread_mutex_lock(&b->death_m);
-				b->death_counter += 1;
-				pthread_mutex_unlock(&b->death_m);
-				printf("%d %d is dead\n", right_time(b), i + 1);
-				return (0);
-			}
-			i++;
-		}
-	}
-	return (0);
 }
 
 int	main(int ac, char **av)
